@@ -1,6 +1,3 @@
-
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
 // 1. DATA CONFIGURATION
 const TECH_STACK = [
   // --- Core Backend & Real-time ---
@@ -30,14 +27,14 @@ const TECH_STACK = [
 ];
 
 const PROJECTS = [
-  { title: 'FalconEx', tags: ['C#', '.NET6', 'GoogleMap API','Websocket'], img: 'https://res.cloudinary.com/donkennie/image/upload/v1769791228/Screenshot_2026-01-30_at_08.50.21_lyypaj.png', desc: 'FalconEx is a smart on-demand logistics and mobility platform, similar to Uber, enables real-time order and delivery tracking.', url: 'https://falcon-new-admin.vercel.app/'},
-  { title: 'Zheeta', tags: ['C#', '.NET', 'Azure', 'CosmosDb', 'SignalR',], img: 'https://res.cloudinary.com/donkennie/image/upload/v1769791188/Screenshot_2026-01-26_at_05.35.09_gt9uhv.png', desc: 'Zheeta is an affiliate-oriented social networking platform designed to connect and empower users—especially Africans—through photo/video sharing, social interactions, events, and monetisation opportunities.', url: 'https://zheeta.com/' },
-  { title: 'Tatizo', tags: ['C#','.NET', 'Azure', 'Websocket', 'RBAC'], img: 'https://res.cloudinary.com/donkennie/image/upload/v1769791163/Screenshot_2026-01-28_at_19.49.10_dt7ycs.png', desc: 'Tatizo is a multi-tenant application with varies business management features to streamline team collaboration and communication', url: 'https://tatizo-website.vercel.app/'},
-  { title: 'Docazy', tags: ['JS', 'Nodejs', 'Grok AI', 'Google Map API'], img: 'https://res.cloudinary.com/donkennie/image/upload/v1769791212/Screenshot_2026-01-26_at_03.41.38_cr60pc.png', desc: 'Docazy is a web-based community platform that allows users to report and track local incidents such as accidents, lost & found items, and public safety updates in real time.', url: 'https://docazy.com/'},
-  { title: 'Mediprep', tags: ['Typescript', 'Azure', 'Kafka', 'Docker', 'VPS',], img: 'https://res.cloudinary.com/donkennie/image/upload/v1769791197/Screenshot_2026-01-26_at_04.40.33_mvk3em.png', desc: 'Mediprep Pro is an online medical exam preparation platform designed to help doctors, nurses, and health professionals practice and improve their exam readiness.', url: 'https://www.mediprep.net/' },
-  { title: 'Fynda', tags: ['C#', '.NET6', 'Azure SignalR','MySQL',], img: 'https://res.cloudinary.com/donkennie/image/upload/v1769791167/Screenshot_2026-01-30_at_09.05.11_xr9qjv.png', desc: 'Fynda is a mobile application that ensures a hassle-free experience in discovering the perfect, budget-friendly hostels, make payment, connect with students and chat with the agents and landlords', url: 'https://fynda.vercel.app/' },
-  { title: 'KampusVillage', tags: ['C#', '.NET8', 'Postgres', 'CQRs', 'Escrow',], img: 'https://res.cloudinary.com/donkennie/image/upload/v1769791282/Screenshot_2026-01-26_at_03.45.26_is9yhe.png', desc: 'KampusVillage is a one-stop app where students buy, sell, and trade used goods, find books, roommates, jobs, and even shout out for what they need to buy. It accommodates Vendors, Runners and Artisans.', url: 'https://kampusvillage.com.ng/' },
-  { title: 'CutSession', tags: ['Typescript', 'Nodejs', 'MongoDb'], img: 'https://res.cloudinary.com/donkennie/image/upload/v1769791420/2-logo-Open-Studio_pfatjl.jpg', desc: 'CutSession is an application where users can schedule pre-wedding photo session and also book any sessions of their interests.' , url: 'https://github.com/donkennie/CutSession'}
+  { title: 'KampusVillage', tags: ['C#', '.NET8', 'Docker', 'VPS', 'Grafana', 'Reactjs', 'Typescript'], img: 'https://res.cloudinary.com/donkennie/image/upload/v1779297107/Screenshot_2026-05-20_at_17.59.24_rbqfxr.png', desc: 'Campus marketplace built on CQRS with escrow & Wallet payment protection. Students trade goods, books, and services across a multi-role ecosystem of vendors, runners, and artisans. Real-time chatting, Tracking, Audits and Metrics', url: 'https://staging.kampusvillage.com/' },
+  { title: 'Zheeta', tags: ['C#', '.NET', 'Azure', 'CosmosDb', 'Postgres', 'Azure SignalR',], img: 'https://res.cloudinary.com/donkennie/image/upload/v1769791188/Screenshot_2026-01-26_at_05.35.09_gt9uhv.png', desc: 'Africa-focused social platform with affiliate monetization, SignalR powered real-time feeds, and photo/video sharing. Backed by Azure CosmosDB for continent-scale performance.', url: 'https://zheeta.com/' },
+  { title: 'Tatizo', tags: ['C#','.NET', 'Azure', 'Websocket', 'RBAC', 'Redis', 'MongoDb'], img: 'https://res.cloudinary.com/donkennie/image/upload/v1769791163/Screenshot_2026-01-28_at_19.49.10_dt7ycs.png', desc: 'Multi-tenant SaaS platform with fine-grained role-based access control, real-time WebSocket communication, and a full suite of business management tools. Built and deployed on Azure.', url: 'https://tatizo-website.vercel.app/'},
+  { title: 'FalconEx', tags: ['C#', '.NET6', 'GoogleMap API','Websocket'], img: 'https://res.cloudinary.com/donkennie/image/upload/v1769791228/Screenshot_2026-01-30_at_08.50.21_lyypaj.png', desc: 'On-demand logistics and mobility platform built with .NET 6. WebSocket powered live order tracking with Google Maps route optimization, engineered for real-time delivery operations at scale.', url: 'https://falcon-new-admin.vercel.app/'},
+  { title: 'Docazy', tags: ['JS', 'Nodejs', 'Grok AI', 'Google Map API'], img: 'https://res.cloudinary.com/donkennie/image/upload/v1769791212/Screenshot_2026-01-26_at_03.41.38_cr60pc.png', desc: 'Community safety platform for reporting and tracking local incidents: accidents, lost items, and public alerts. Visualized in real time on Google Maps with Grok AI powered incident triage.', url: 'https://docazy.com/'},
+  { title: 'Mediprep', tags: ['Typescript', 'Azure', 'Kafka', 'Docker', 'VPS',], img: 'https://res.cloudinary.com/donkennie/image/upload/v1769791197/Screenshot_2026-01-26_at_04.40.33_mvk3em.png', desc: 'Medical exam preparation platform for doctors, nurses, and healthcare professionals. Event driven with Kafka, containerized on Docker, deployed to a VPS on Azure. Built to handle concurrent exam sessions at scale.', url: 'https://www.mediprep.net/' },
+  { title: 'Fynda', tags: ['C#', '.NET6', 'Azure SignalR','MySQL',], img: 'https://res.cloudinary.com/donkennie/image/upload/v1769791167/Screenshot_2026-01-30_at_09.05.11_xr9qjv.png', desc: 'Student hostel discovery and booking app with integrated payments and Azure SignalR powered real-time chat between students, agents, and landlords. Built mobile first for campus life on .NET 6.', url: 'https://fynda.vercel.app/' },
+  { title: 'CutSession', tags: ['Typescript', 'Nodejs', 'MongoDb'], img: 'https://res.cloudinary.com/donkennie/image/upload/v1769791420/2-logo-Open-Studio_pfatjl.jpg', desc: 'Photography session booking platform for pre-wedding shoots and custom bookings. Clean TypeScript/Node.js REST API with MongoDB, from inquiry to confirmed appointment.' , url: 'https://github.com/donkennie/CutSession'}
 ];
 
 const ARTICLES = [
@@ -60,12 +57,18 @@ const ARTICLES = [
 const init = () => {
   renderTechStackMarquee();
   renderProjects();
+  setup3DTilt();
   renderArticles();
   setupScrollReveal();
   setupChat();
   setupNav();
   setupTerminal();
   setupSplashes();
+  setupScrollProgress();
+  setupCursorGlow();
+  setupCounters();
+  setupMagneticButtons();
+  setupHeroCanvas();
 };
 
 const renderTechStackMarquee = () => {
@@ -264,28 +267,22 @@ const setupTerminal = () => {
   observer.observe(terminal);
 };
 
-// Mouse splash effect
+// Sound wave ripple on click
 const setupSplashes = () => {
   document.addEventListener('mousedown', (e) => {
-    for (let i = 0; i < 8; i++) {
-      const s = document.createElement('div');
-      s.className = 'splash';
-      document.body.appendChild(s);
-
-      const angle = (i / 8) * Math.PI * 2;
-      const dist = 30 + Math.random() * 20;
-      const tx = Math.cos(angle) * dist;
-      const ty = Math.sin(angle) * dist;
-
-      s.style.left = e.pageX + 'px';
-      s.style.top = e.pageY + 'px';
-      s.style.opacity = '1';
-
-      s.animate([
-        { transform: 'translate(0,0) scale(1)', opacity: 1 },
-        { transform: `translate(${tx}px, ${ty}px) scale(0)`, opacity: 0 }
-      ], { duration: 600, easing: 'ease-out' }).onfinish = () => s.remove();
-    }
+    [
+      { size: 60,  delay: 0,   opacity: 0.7 },
+      { size: 100, delay: 80,  opacity: 0.4 },
+      { size: 140, delay: 160, opacity: 0.2 },
+    ].forEach(({ size, delay, opacity }) => {
+      const ring = document.createElement('div');
+      ring.style.cssText = `position:fixed;left:${e.clientX}px;top:${e.clientY}px;width:0;height:0;border:1.5px solid rgba(246,166,33,${opacity});border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:9999;`;
+      document.body.appendChild(ring);
+      ring.animate(
+        [{ width: '0px', height: '0px', opacity }, { width: `${size}px`, height: `${size}px`, opacity: 0 }],
+        { duration: 700, delay, easing: 'ease-out' }
+      ).onfinish = () => ring.remove();
+    });
   });
 };
 
@@ -327,11 +324,11 @@ const setupChat = () => {
       const chat = ai.chats.create({
         model: 'gemini-3-flash-preview',
         config: {
-          systemInstruction: `You are the Digital Twin of Kehinde (Kennie) Timothy Ajeigbe. 
-                    Kennie is a Software & AI Engineer with 4+ years of experience. 
+          systemInstruction: `You are the Digital Twin of Kehinde (Kennie) Timothy Ajeigbe.
+                    Kennie is a Software & AI Engineer with 4+ years of experience.
                     He specializes in C#, .NET, Typescript, and integrating LLMs like Gemini.
-                    Keep responses professional, concise, and helpful. 
-                    Represent his portfolio of 50+ projects. 
+                    Keep responses professional, concise, and helpful.
+                    Represent his portfolio of 50+ projects.
                     Personality: Technically profound yet approachable.`
         }
       });
@@ -370,6 +367,154 @@ const addMessage = (role, text, id = null) => {
     `;
   messages.appendChild(div);
   messages.scrollTop = messages.scrollHeight;
+};
+
+const setupScrollProgress = () => {
+  const bar = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+    bar.style.width = pct + '%';
+  }, { passive: true });
+};
+
+const setupCursorGlow = () => {
+  const glow = document.getElementById('cursor-glow');
+  document.addEventListener('mousemove', (e) => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+  }, { passive: true });
+};
+
+const setupCounters = () => {
+  const counters = document.querySelectorAll('.counter');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const target = parseInt(entry.target.dataset.target);
+      const start = performance.now();
+      const duration = 1800;
+      const tick = (now) => {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        entry.target.textContent = Math.floor(eased * target) + (progress >= 1 ? '+' : '');
+        if (progress < 1) requestAnimationFrame(tick);
+        else entry.target.textContent = target + '+';
+      };
+      requestAnimationFrame(tick);
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => observer.observe(c));
+};
+
+const setup3DTilt = () => {
+  document.querySelectorAll('#projects-grid > div').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transition = 'transform 0.1s ease';
+      card.style.transform = `perspective(900px) rotateY(${x * 14}deg) rotateX(${-y * 14}deg) scale(1.03)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform 0.7s cubic-bezier(0.23, 1, 0.32, 1)';
+      card.style.transform = 'perspective(900px) rotateY(0deg) rotateX(0deg) scale(1)';
+    });
+  });
+};
+
+const setupMagneticButtons = () => {
+  document.querySelectorAll('.magnetic').forEach(btn => {
+    btn.addEventListener('mouseenter', () => {
+      btn.style.transition = 'transform 0.1s ease';
+    });
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = (e.clientX - rect.left - rect.width / 2) * 0.4;
+      const y = (e.clientY - rect.top - rect.height / 2) * 0.4;
+      btn.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+      btn.style.transform = 'translate(0, 0) scale(1)';
+    });
+  });
+};
+
+const setupHeroCanvas = () => {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const mouse = { x: -999, y: -999 };
+  const resize = () => {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  };
+  resize();
+  new ResizeObserver(resize).observe(canvas.parentElement);
+  const count = Math.min(Math.floor((canvas.offsetWidth * canvas.offsetHeight) / 14000), 80);
+  const particles = Array.from({ length: count }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.25,
+    vy: (Math.random() - 0.5) * 0.25,
+    r: Math.random() * 1.5 + 0.5,
+  }));
+  canvas.parentElement.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  });
+  canvas.parentElement.addEventListener('mouseleave', () => { mouse.x = -999; mouse.y = -999; });
+  const draw = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      const dx = mouse.x - p.x, dy = mouse.y - p.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist < 160 && dist > 0) { p.vx += (dx / dist) * 0.06; p.vy += (dy / dist) * 0.06; }
+      p.vx *= 0.96; p.vy *= 0.96;
+      p.x = (p.x + p.vx + canvas.width) % canvas.width;
+      p.y = (p.y + p.vy + canvas.height) % canvas.height;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(246,166,33,0.55)';
+      ctx.fill();
+    });
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const d = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
+        if (d < 110) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(246,166,33,${0.13 * (1 - d / 110)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  };
+  draw();
+};
+
+const setupScramble = () => {
+  const el = document.getElementById('scramble-name');
+  if (!el) return;
+  const final = el.textContent;
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#@%&$!';
+  let frame = 0;
+  const total = final.length * 5;
+  const run = () => {
+    el.textContent = final.split('').map((ch, i) =>
+      i < frame / 5 ? ch : chars[Math.floor(Math.random() * chars.length)]
+    ).join('');
+    frame++;
+    if (frame <= total) requestAnimationFrame(run);
+    else el.textContent = final;
+  };
+  setTimeout(run, 500);
 };
 
 document.addEventListener('DOMContentLoaded', init);

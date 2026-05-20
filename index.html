@@ -92,6 +92,73 @@
         transform: translateY(0);
     }
 }
+        @keyframes orb-float-1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-3%, 5%) scale(1.05); }
+            66% { transform: translate(4%, -3%) scale(0.97); }
+        }
+        @keyframes orb-float-2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            40% { transform: translate(5%, -4%) scale(1.08); }
+            70% { transform: translate(-4%, 3%) scale(0.95); }
+        }
+        .orb-1 { animation: orb-float-1 14s ease-in-out infinite; }
+        .orb-2 { animation: orb-float-2 18s ease-in-out infinite; }
+        /* Background symbol positions */
+        .bg-guitar {
+            position: absolute; bottom: 0%; left: -3%;
+            width: 290px; height: auto;
+            animation: bg-guitar-float 10s ease-in-out infinite;
+        }
+        .bg-scales {
+            position: absolute; top: 8%; right: 1%;
+            width: 300px; height: auto;
+            animation: bg-scales-float 14s ease-in-out infinite;
+        }
+        .bg-wig {
+            position: absolute; top: 2%; left: 6%;
+            width: 220px; height: auto;
+            animation: bg-wig-float 12s ease-in-out infinite;
+        }
+        .bg-notes {
+            position: absolute; bottom: 28%; right: 4%;
+            width: 140px; height: auto;
+            animation: bg-notes-float 7s ease-in-out infinite;
+        }
+        @keyframes bg-guitar-float {
+            0%, 100% { transform: rotate(-8deg) translateY(0px);  opacity: 0.16; }
+            50%       { transform: rotate(-8deg) translateY(-28px); opacity: 0.24; }
+        }
+        @keyframes bg-scales-float {
+            0%, 100% { transform: translateY(0px);  opacity: 0.15; }
+            50%       { transform: translateY(-22px); opacity: 0.22; }
+        }
+        @keyframes bg-wig-float {
+            0%, 100% { transform: rotate(4deg) translateY(0px);  opacity: 0.15; }
+            50%       { transform: rotate(4deg) translateY(-18px); opacity: 0.22; }
+        }
+        @keyframes bg-notes-float {
+            0%, 100% { transform: translateY(0px) rotate(-6deg); opacity: 0.18; }
+            50%       { transform: translateY(-24px) rotate(-6deg); opacity: 0.26; }
+        }
+        .magnetic { position: relative; display: inline-flex; }
+        .counter { text-shadow: 0 0 25px rgba(246, 166, 33, 0.6); }
+        #projects-grid > div { will-change: transform; }
+        @keyframes card-border-pulse {
+            0%, 100% { box-shadow: 0 0 0 1px rgba(246,166,33,0), 0 20px 60px rgba(0,0,0,0.4); }
+            50% { box-shadow: 0 0 25px 2px rgba(246,166,33,0.2), 0 20px 60px rgba(0,0,0,0.5); }
+        }
+        #projects-grid > div:hover { animation: card-border-pulse 2s ease-in-out infinite; }
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 200px 200px;
+        }
     </style>
     <script type="importmap">
     {
@@ -102,10 +169,126 @@
     </script>
 </head>
 <body class="overflow-x-hidden">
+    <div id="scroll-progress" class="fixed top-0 left-0 z-[200] h-[2px]" style="width:0%;background:linear-gradient(90deg,#F6A621,#FFD700);box-shadow:0 0 10px rgba(246,166,33,0.9);transition:width 0.1s linear;"></div>
+    <div id="cursor-glow" class="fixed pointer-events-none rounded-full" style="width:600px;height:600px;background:radial-gradient(circle,rgba(246,166,33,0.07) 0%,transparent 65%);top:0;left:0;transform:translate(-50%,-50%);z-index:1;transition:left 0.1s linear,top 0.1s linear;"></div>
+
     <!-- Background Effects -->
     <div class="fixed inset-0 pointer-events-none -z-10">
-        <div class="absolute top-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-[#F6A621]/10 blur-[150px] rounded-full"></div>
-        <div class="absolute bottom-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-[#F6A621]/5 blur-[120px] rounded-full"></div>
+        <div class="orb-1 absolute top-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-[#F6A621]/10 blur-[150px] rounded-full"></div>
+        <div class="orb-2 absolute bottom-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-[#F6A621]/5 blur-[120px] rounded-full"></div>
+
+        <!-- ═══ MUSIC: Acoustic guitar ═══ -->
+        <svg class="bg-guitar" viewBox="0 0 100 285" fill="none" stroke="#F6A621" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <!-- Headstock -->
+            <rect x="38" y="4" width="24" height="26" rx="5" stroke-width="2"/>
+            <!-- Tuning pegs left (3) -->
+            <line x1="38" y1="11" x2="26" y2="11" stroke-width="2.5"/>
+            <circle cx="24" cy="11" r="4" stroke-width="2"/>
+            <line x1="38" y1="19" x2="26" y2="19" stroke-width="2.5"/>
+            <circle cx="24" cy="19" r="4" stroke-width="2"/>
+            <line x1="38" y1="27" x2="26" y2="27" stroke-width="2.5"/>
+            <circle cx="24" cy="27" r="4" stroke-width="2"/>
+            <!-- Tuning pegs right (3) -->
+            <line x1="62" y1="11" x2="74" y2="11" stroke-width="2.5"/>
+            <circle cx="76" cy="11" r="4" stroke-width="2"/>
+            <line x1="62" y1="19" x2="74" y2="19" stroke-width="2.5"/>
+            <circle cx="76" cy="19" r="4" stroke-width="2"/>
+            <line x1="62" y1="27" x2="74" y2="27" stroke-width="2.5"/>
+            <circle cx="76" cy="27" r="4" stroke-width="2"/>
+            <!-- Nut -->
+            <line x1="38" y1="30" x2="62" y2="30" stroke-width="2.5"/>
+            <!-- Neck -->
+            <line x1="41" y1="30" x2="41" y2="112" stroke-width="2"/>
+            <line x1="59" y1="30" x2="59" y2="112" stroke-width="2"/>
+            <!-- Frets -->
+            <line x1="41" y1="46" x2="59" y2="46" stroke-width="1.5"/>
+            <line x1="41" y1="61" x2="59" y2="61" stroke-width="1.5"/>
+            <line x1="41" y1="74" x2="59" y2="74" stroke-width="1.5"/>
+            <line x1="41" y1="87" x2="59" y2="87" stroke-width="1.5"/>
+            <line x1="41" y1="99" x2="59" y2="99" stroke-width="1.5"/>
+            <line x1="41" y1="109" x2="59" y2="109" stroke-width="1.5"/>
+            <!-- Body outline: upper bout → waist → lower bout -->
+            <path d="M41 112 Q12 112 10 136 Q8 162 38 168 Q26 180 28 196 Q5 210 5 238 Q5 278 50 280 Q95 278 95 238 Q95 210 72 196 Q74 180 62 168 Q92 162 90 136 Q88 112 59 112 Z" stroke-width="2.2"/>
+            <!-- Sound hole -->
+            <circle cx="50" cy="215" r="17" stroke-width="2"/>
+            <!-- Bridge -->
+            <rect x="36" y="248" width="28" height="7" rx="2.5" stroke-width="2"/>
+            <!-- Bridge pins -->
+            <circle cx="41" cy="248" r="2"/><circle cx="46" cy="248" r="2"/>
+            <circle cx="50" cy="248" r="2"/><circle cx="54" cy="248" r="2"/>
+            <circle cx="59" cy="248" r="2"/>
+            <!-- Strings -->
+            <line x1="43" y1="30" x2="39" y2="255" stroke-width="0.9"/>
+            <line x1="47" y1="30" x2="44" y2="255" stroke-width="0.9"/>
+            <line x1="50" y1="30" x2="48" y2="255" stroke-width="0.9"/>
+            <line x1="53" y1="30" x2="52" y2="255" stroke-width="0.9"/>
+            <line x1="57" y1="30" x2="57" y2="255" stroke-width="0.9"/>
+            <line x1="59" y1="30" x2="61" y2="255" stroke-width="0.9"/>
+        </svg>
+
+        <!-- ═══ LAW: Scales of justice ═══ -->
+        <svg class="bg-scales" viewBox="0 0 220 250" aria-hidden="true">
+            <!-- Pedestal base (filled) -->
+            <path d="M72 242 L148 242 L132 218 L112 206 L108 206 L108 72 L112 72 L112 60 L108 60 L108 50 L100 42 L92 50 L92 60 L96 60 L96 72 L100 72 L100 206 L96 206 L80 218 Z" fill="#F6A621"/>
+            <!-- Beam bar (filled) -->
+            <rect x="14" y="62" width="192" height="8" rx="4" fill="#F6A621"/>
+            <!-- Pivot ornament -->
+            <circle cx="110" cy="58" r="12" fill="#F6A621"/>
+            <circle cx="110" cy="58" r="6" fill="#000" opacity="0.4"/>
+            <!-- LEFT pan: two suspension cords + bowl -->
+            <line x1="28" y1="70" x2="10" y2="114" stroke="#F6A621" stroke-width="2" stroke-linecap="round"/>
+            <line x1="28" y1="70" x2="48" y2="114" stroke="#F6A621" stroke-width="2" stroke-linecap="round"/>
+            <line x1="8"  y1="114" x2="50" y2="114" stroke="#F6A621" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M8 114 Q29 132 50 114" fill="none" stroke="#F6A621" stroke-width="3" stroke-linecap="round"/>
+            <!-- RIGHT pan: two cords + bowl -->
+            <line x1="192" y1="70" x2="174" y2="114" stroke="#F6A621" stroke-width="2" stroke-linecap="round"/>
+            <line x1="192" y1="70" x2="210" y2="114" stroke="#F6A621" stroke-width="2" stroke-linecap="round"/>
+            <line x1="172" y1="114" x2="212" y2="114" stroke="#F6A621" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M172 114 Q192 132 212 114" fill="none" stroke="#F6A621" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+
+        <!-- ═══ LAW: Barrister's wig ═══ -->
+        <svg class="bg-wig" viewBox="0 0 160 205" fill="none" stroke="#F6A621" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <!-- Wig dome cap (faint fill so it reads as a solid object) -->
+            <path d="M18 96 Q14 42 80 16 Q146 42 142 96 Z" fill="#F6A621" fill-opacity="0.18" stroke="none"/>
+            <!-- Horizontal rolled curls row 1 (top) -->
+            <path d="M42 38 Q51 30 60 38 Q69 30 78 38 Q87 30 96 38 Q105 30 114 38" stroke-width="3.5"/>
+            <!-- Row 2 -->
+            <path d="M30 56 Q42 47 55 56 Q68 47 80 56 Q92 47 105 56 Q116 47 126 56" stroke-width="3.5"/>
+            <!-- Row 3 -->
+            <path d="M20 74 Q34 64 50 74 Q66 64 80 74 Q94 64 110 74 Q124 64 136 74" stroke-width="3.5"/>
+            <!-- Brim outline (solid border) -->
+            <path d="M18 96 Q80 106 142 96" stroke-width="2.5"/>
+            <!-- Left hanging side piece (long curl) -->
+            <path d="M18 96 Q4 118 8 150 Q10 168 14 188" stroke-width="3.5"/>
+            <!-- Left side ringlet curls -->
+            <path d="M6 132 Q-4 140 3 150 Q9 160 5 170" stroke-width="2.5"/>
+            <path d="M4 158 Q-5 167 2 176 Q8 184 5 192" stroke-width="2.5"/>
+            <!-- Right hanging side piece -->
+            <path d="M142 96 Q156 118 152 150 Q150 168 146 188" stroke-width="3.5"/>
+            <!-- Right side ringlet curls -->
+            <path d="M154 132 Q164 140 157 150 Q151 160 155 170" stroke-width="2.5"/>
+            <path d="M156 158 Q165 167 158 176 Q152 184 155 192" stroke-width="2.5"/>
+        </svg>
+
+        <!-- ═══ MUSIC: Beamed notes ═══ -->
+        <svg class="bg-notes" viewBox="0 0 130 110" aria-hidden="true">
+            <!-- Note head 1 (filled ellipse) -->
+            <ellipse cx="22" cy="82" rx="11" ry="8" transform="rotate(-18 22 82)" fill="#F6A621"/>
+            <!-- Stem 1 -->
+            <line x1="32" y1="77" x2="32" y2="18" stroke="#F6A621" stroke-width="3.5" stroke-linecap="round"/>
+            <!-- Note head 2 -->
+            <ellipse cx="70" cy="64" rx="11" ry="8" transform="rotate(-18 70 64)" fill="#F6A621"/>
+            <!-- Stem 2 -->
+            <line x1="80" y1="59" x2="80" y2="8" stroke="#F6A621" stroke-width="3.5" stroke-linecap="round"/>
+            <!-- Note head 3 -->
+            <ellipse cx="108" cy="78" rx="11" ry="8" transform="rotate(-18 108 78)" fill="#F6A621"/>
+            <!-- Stem 3 -->
+            <line x1="118" y1="73" x2="118" y2="22" stroke="#F6A621" stroke-width="3.5" stroke-linecap="round"/>
+            <!-- Beam connecting all three stems (double beam) -->
+            <path d="M32 18 Q56 10 80 8 Q99 8 118 22" fill="none" stroke="#F6A621" stroke-width="4" stroke-linecap="round"/>
+            <path d="M32 28 Q56 20 80 18 Q99 18 118 32" fill="none" stroke="#F6A621" stroke-width="3" stroke-linecap="round"/>
+        </svg>
     </div>
 
     <!-- Navigation -->
@@ -138,8 +321,9 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="flex items-center min-h-screen px-6 pt-32 mx-auto md:px-16 max-w-7xl">
-        <div class="grid items-center gap-12 md:grid-cols-2">
+    <section class="relative overflow-hidden flex items-center min-h-screen px-6 pt-32 mx-auto md:px-16 max-w-7xl">
+        <canvas id="hero-canvas" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
+        <div class="relative z-10 grid items-center gap-12 md:grid-cols-2">
             <div class="reveal">
                 <h1 class="mb-4 text-6xl font-bold leading-none tracking-tighter md:text-8xl lg:text-[110px]">
                     KEHINDE T.<br> 
@@ -149,10 +333,10 @@
                     Software & AI Engineer
                 </h3>
                 <p class="max-w-lg mb-10 text-lg font-light leading-relaxed md:text-xl text-white/60">
-                    Crafting scalable digital architectures and integrating high-intelligence features into modern product ecosystems.
+                    I build and deploy complete systems: scalable backends, cloud infrastructure, containerized VPS deployments, clean frontends, and AI integrations. 4+ years of production ready software across logistics, finance, healthcare and social.
                 </p>
                 <div class="flex flex-wrap gap-4">
-                    <a href="#contact" class="px-8 py-4 bg-[#F6A621] text-black font-bold rounded-xl flex items-center gap-3 hover:scale-105 transition-all">
+                    <a href="#contact" class="magnetic px-8 py-4 bg-[#F6A621] text-black font-bold rounded-xl flex items-center gap-3 transition-all">
                         Hire Me <i data-lucide="arrow-right" size="18"></i>
                     </a>
                     <a href="https://drive.google.com/file/d/1dRLZGTN0wDGJ4QxSJrXKCu0D6xYYQ6rN/view?usp=sharing" target="_blank" class="px-8 py-4 font-bold transition-all border border-white/20 rounded-xl hover:bg-white/5">
@@ -235,8 +419,8 @@
     <section id="blog" class="px-6 py-32 mx-auto md:px-16 max-w-7xl">
         <div class="flex flex-col items-center justify-between mb-16 md:flex-row reveal">
             <div>
-                <p class="text-[#F6A621] uppercase tracking-[0.3em] font-bold text-xs mb-4">Journal</p>
-                <h2 class="text-4xl font-bold md:text-5xl">LinkedIn Articles</h2>
+                <p class="text-[#F6A621] uppercase tracking-[0.3em] font-bold text-xs mb-4">Insights</p>
+                <h2 class="text-4xl font-bold md:text-5xl">Technical Writing</h2>
             </div>
             <a href="https://www.linkedin.com/in/kehinde-timothy-ajeigbe/recent-activity/all/" target="_blank" class="text-[#F6A621] font-bold text-sm flex items-center gap-2 hover:translate-x-1 transition-all">
                 All Articles <i data-lucide="arrow-right"></i>
@@ -267,7 +451,7 @@
             <div id="chat-messages" class="flex-1 p-6 space-y-4 overflow-y-auto scrollbar-hide">
                 <div class="flex justify-start">
                     <div class="p-4 text-sm border rounded-tl-none bg-white/5 border-white/10 rounded-2xl text-white/80">
-                        Hi! I'm Elenn AI. I can help you with questions about his experience, projects, or how to contact him!
+                        Hey! I'm Elenn — Kehinde's AI assistant. Ask me about his tech stack, projects, work experience, or the best way to reach him.
                     </div>
                 </div>
             </div>
@@ -290,15 +474,19 @@
 
     <!-- Contact -->
     <section id="contact" class="max-w-4xl px-6 py-32 mx-auto text-center md:px-16 reveal">
-        <h2 class="mb-8 text-5xl font-bold md:text-7xl">Let's Connect</h2>
-        <p class="mb-12 text-xl text-white/50">Building something amazing? I'm available for new opportunities and high-impact collaborations.</p>
+        <h2 class="mb-8 text-5xl font-bold md:text-7xl">Open to Work</h2>
+        <p class="mb-12 text-xl text-white/50">Actively seeking senior engineering roles. I bring 4+ years of production-grade backend experience — real-time systems, AI integrations, and cloud-native architecture. Available immediately.</p>
         <div class="flex flex-wrap justify-center gap-6">
             <a href="mailto:ajeigbekehinde160@gmail.com" class="px-10 py-5 bg-[#F6A621] text-black font-bold rounded-2xl flex items-center gap-3">
                 <i data-lucide="mail"></i> ajeigbekehinde160@gmail.com
             </a>
             <div class="flex gap-4">
-                <a href="https://github.com/donkennie" target="_blank" class="w-16 h-16 glass rounded-2xl flex items-center justify-center hover:text-[#F6A621] transition-all"><i data-lucide="github"></i></a>
-                <a href="https://www.linkedin.com/in/kehinde-timothy-ajeigbe/" target="_blank" class="w-16 h-16 glass rounded-2xl flex items-center justify-center hover:text-[#F6A621] transition-all"><i data-lucide="linkedin"></i></a>
+                <a href="https://github.com/donkennie" target="_blank" class="w-16 h-16 glass rounded-2xl flex items-center justify-center text-white hover:text-[#F6A621] transition-all" aria-label="GitHub">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/kehinde-timothy-ajeigbe/" target="_blank" class="w-16 h-16 glass rounded-2xl flex items-center justify-center text-white hover:text-[#F6A621] transition-all" aria-label="LinkedIn">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
             </div>
         </div>
     </section>
